@@ -82,5 +82,40 @@
       "content": "你好！很高兴能与你交流。有什么可以帮你的吗？不管是聊天、获取信息还是解决问题，我都乐意为你服务。",
       "timestamp": "2026-04-18T22:56:02.501Z"
     }
+  ],
+  [
+    {
+      "role": "user",
+      "content": "hi",
+      "timestamp": "2026-04-18T23:00:39.128Z"
+    },
+    {
+      "role": "ai",
+      "content": "tell lin there is a problem with my ai",
+      "timestamp": "2026-04-18T23:00:39.129Z",
+      "isError": true
+    },
+    {
+      "role": "user",
+      "content": "hi",
+      "timestamp": "2026-04-18T23:00:42.511Z"
+    },
+    {
+      "role": "ai",
+      "content": "tell lin there is a problem with my ai",
+      "timestamp": "2026-04-18T23:00:42.511Z",
+      "isError": true
+    },
+    {
+      "role": "user",
+      "content": "hi",
+      "timestamp": "2026-04-18T23:00:43.539Z"
+    },
+    {
+      "role": "ai",
+      "content": "tell lin there is a problem with my ai",
+      "timestamp": "2026-04-18T23:00:43.539Z",
+      "isError": true
+    }
   ]
 ]

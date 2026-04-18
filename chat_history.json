@@ -7,5 +7,42 @@
   {
     "timestamp": "2026-04-18T20:41:15.913Z",
     "content": "我不好"
-  }
+  },
+  [
+    {
+      "timestamp": "2026-04-18T20:40:48.518Z",
+      "role": "user",
+      "content": "你好"
+    },
+    {
+      "timestamp": "2026-04-18T20:41:15.913Z",
+      "role": "user",
+      "content": "我不好"
+    },
+    {
+      "timestamp": "2026-04-18T21:05:33.537Z",
+      "role": "ai",
+      "content": "你好！有什么我可以帮助你的吗？"
+    },
+    {
+      "timestamp": "2026-04-18T21:05:40.545Z",
+      "role": "user",
+      "content": "hi"
+    },
+    {
+      "timestamp": "2026-04-18T21:05:40.549Z",
+      "role": "ai",
+      "content": "收到！这确实是个值得探讨的问题。我的想法是...\n\n（提示：请在 aichat.js 中配置你的 API Key 以启用真实 AI 回复）"
+    },
+    {
+      "timestamp": "2026-04-18T21:05:49.733Z",
+      "role": "user",
+      "content": "hi"
+    },
+    {
+      "timestamp": "2026-04-18T21:05:49.733Z",
+      "role": "ai",
+      "content": "收到！这确实是个值得探讨的问题。我的想法是...\n\n（提示：请在 aichat.js 中配置你的 API Key 以启用真实 AI 回复）"
+    }
+  ]
 ]

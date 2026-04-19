@@ -2,8 +2,8 @@ name: Auto Vectorize Memory
 on:
   push:
     paths:
-      - 'chat_history.json'  
-workflow_dispatch:
+      - 'chat_history.json'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest

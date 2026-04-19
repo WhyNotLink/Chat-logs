@@ -4,7 +4,7 @@ import fs from 'fs';
 const client = new InferenceClient(process.env.HF_TOKEN);
 
 async function run() {
-    const memoryFile = './memory.json';
+    const memoryFile = './chat_history.json';
     const memories = JSON.parse(fs.readFileSync(memoryFile, 'utf8'));
 
     for (let item of memories) {

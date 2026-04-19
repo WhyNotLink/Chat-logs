@@ -4,22 +4,29 @@ import fs from 'fs';
 const client = new InferenceClient(process.env.HF_TOKEN);
 
 async function run() {
-    const memoryFile = './chat_history.json';
-    const memories = JSON.parse(fs.readFileSync(memoryFile, 'utf8'));
+    const file = './chat_history.json';
+    if (!fs.existsSync(file)) return;
 
-    for (let item of memories) {
-        if (!item.embedding) {
-            console.log(`正在转换: ${item.content}`);
-            const output = await client.featureExtraction({
-                model: "shibing624/text2vec-base-chinese",
-                inputs: item.content,
-            });
-            item.embedding = output;
+    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+
+    for (let session of data) {
+        for (let msg of session) {
+            if (!msg.embedding && msg.content) {
+                console.log(`Vectorizing: ${msg.content.substring(0, 15)}`);
+                try {
+                    msg.embedding = await client.featureExtraction({
+                        model: "shibing624/text2vec-base-chinese",
+                        inputs: msg.content,
+                    });
+                    await new Promise(r => setTimeout(r, 200));
+                } catch (e) {
+                    console.error(e.message);
+                }
+            }
         }
     }
 
-    fs.writeFileSync('./vectors.json', JSON.stringify(memories, null, 2));
-    console.log("向量文件 vectors.json 已更新");
+    fs.writeFileSync('./vectors.json', JSON.stringify(data, null, 2));
 }
 
 run().catch(console.error);

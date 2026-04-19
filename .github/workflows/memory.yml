@@ -1,30 +1,62 @@
 name: Auto Vectorize
+
 on:
   push:
     paths:
       - 'chat_history.json'
+  workflow_dispatch: # 允许你手动点击运行，方便调试
 
 permissions:
   contents: write
+
+# 设置全局环境变量，消除 Node 20 弃用警告
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 获取完整历史，防止 push 失败
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install @huggingface/inference
-      - run: node vectorize.mjs
+
+      - name: Install Dependencies
+        run: npm install @huggingface/inference
+
+      - name: Run Vectorization
+        run: node vectorize.mjs
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
+
       - name: Push results
+        env:
+          # 使用内置 GITHUB_TOKEN，不需要额外配置 Secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # 1. 配置身份信息
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "github-actions[bot]"
+          
+          # 2. 注入 Token 解决 128 错误
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          
+          # 3. 只有在文件有变化时才执行提交
           if [ -f vectors.json ]; then
             git add vectors.json
-            git commit -m "update vectors" || exit 0
-            git push
+            if git diff --staged --quiet; then
+              echo "No changes in vectors.json, skipping push."
+            else
+              git commit -m "chore: auto-update vectors [skip ci]"
+              git push
+            fi
+          else
+            echo "vectors.json not found, something went wrong."
+            exit 1
           fi

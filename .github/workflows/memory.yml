@@ -1,12 +1,12 @@
-name: Auto Vectorize Memory
+name: Auto Vectorize
 on:
   push:
     paths:
-      - 'chat_history.json'  
+      - 'chat_history.json'
 
 permissions:
   contents: write
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,14 +15,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install @huggingface/inference 
+      - run: npm install @huggingface/inference
       - run: node vectorize.mjs
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }} 
-      - name: Commit and Push
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      - name: Push results
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add vectors.json
-          git commit -m "Update vectors database" || exit 0
-          git push
+          if [ -f vectors.json ]; then
+            git add vectors.json
+            git commit -m "update vectors" || exit 0
+            git push
+          fi

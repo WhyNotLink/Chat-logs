@@ -1,13 +1,18 @@
 import { InferenceClient } from "@huggingface/inference";
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const client = new InferenceClient(process.env.HF_TOKEN);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function run() {
-    const file = './chat_history.json';
-    if (!fs.existsSync(file)) return;
+    const filePath = path.join(__dirname, 'chat_history.json');
+    const outputPath = path.join(__dirname, 'vectors.json');
 
-    const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+    if (!fs.existsSync(filePath)) return;
+
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
     for (let session of data) {
         for (let msg of session) {
@@ -26,7 +31,7 @@ async function run() {
         }
     }
 
-    fs.writeFileSync('./vectors.json', JSON.stringify(data, null, 2));
+    fs.writeFileSync(outputPath, JSON.stringify(data, null, 2));
 }
 
 run().catch(console.error);

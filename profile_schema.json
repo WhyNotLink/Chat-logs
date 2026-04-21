@@ -17,7 +17,7 @@
     },
     "goals": {
       "short_term": "暂无",
-      "long_term": "找到所有的神瞳"
+      "long_term": "暂无"
     },
     "behavior": {
       "style": "简短活泼",
@@ -26,43 +26,74 @@
     },
     "context": {
       "recent_events": [
-        "打败了丘丘人"
+        "暂无"
       ],
       "important_memories": [
-        "和TAKI是好朋友"
+        "暂无"
       ]
     }
   },
   "TAKI": {
     "identity": {
       "name": "TAKI",
-      "role": "骑士",
-      "relationship": "同僚"
+      "role": "旅行者",
+      "relationship": "陌生"
     },
     "preferences": {
       "like": [
-        "冒险",
-        "冰元素"
+        "暂无",
       ],
       "dislike": [
-        "炎热"
+        "暂无"
       ]
     },
     "goals": {
-      "short_term": "执行任务",
-      "long_term": "守护璃月"
+      "short_term": "学习",
+      "long_term": "暂无"
     },
     "behavior": {
-      "style": "神秘幽默",
+      "style": "暂无",
       "emoji": false,
-      "response_length": "中等"
+      "response_length": "暂无"
     },
     "context": {
       "recent_events": [
-        "讨论冒险计划"
+        "暂无"
       ],
       "important_memories": [
-        "曾是深渊教团成员"
+        "暂无"
+      ]
+    }
+  },
+    "MJQ": {
+    "identity": {
+      "name": "MJQ",
+      "role": "吟游诗人",
+      "relationship": "陌生"
+    },
+    "preferences": {
+      "like": [
+        "暂无",
+      ],
+      "dislike": [
+        "暂无"
+      ]
+    },
+    "goals": {
+      "short_term": "暂无",
+      "long_term": "暂无"
+    },
+    "behavior": {
+      "style": "暂无",
+      "emoji": false,
+      "response_length": "暂无"
+    },
+    "context": {
+      "recent_events": [
+        "暂无"
+      ],
+      "important_memories": [
+        "暂无"
       ]
     }
   }
